@@ -1,4 +1,4 @@
-package com.salutem.Salutem;
+package com.salutem.salutem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

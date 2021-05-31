@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.salutem</groupId>
-	<artifactId>Salutem</artifactId>
+	<artifactId>salutem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Salutem</name>
+	<name>salutem</name>
 	<description>Rede social Salutem. Projeto Integrador Generation</description>
 	<properties>
 		<java.version>11</java.version>
