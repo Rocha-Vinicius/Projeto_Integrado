@@ -10,12 +10,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_usuario")
-public class UsuarioModel {
+public class Usuario {
 
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private long id;
+		private long id_Usuario;
 		
 		@NotNull
 		@Size(min = 5, max = 45)
@@ -37,13 +37,13 @@ public class UsuarioModel {
 		private String urlImagemUsuario;
 
 
-		public long getId() {
-			return id;
+		public long getId_Usuario() {
+			return id_Usuario;
 		}
 
 
-		public void setId(long id) {
-			this.id = id;
+		public void setId_Usuario(long id_Usuario) {
+			this.id_Usuario = id_Usuario;
 		}
 
 
@@ -95,9 +95,7 @@ public class UsuarioModel {
 		public void setUrlImagemUsuario(String urlImagemUsuario) {
 			this.urlImagemUsuario = urlImagemUsuario;
 		}
-		
-		
-		
+
 		
 	
 }
