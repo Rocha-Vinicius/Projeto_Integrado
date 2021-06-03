@@ -63,16 +63,16 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/atualizar/{id_usuario}")
-	public ResponseEntity<Object> atualizarUsuario (@PathVariable(value = "id_Usuario") Long id_Usuario, 
+	public ResponseEntity<Object> atualizarUsuario (@PathVariable Long id_usuario, 
 			@Valid @RequestBody Usuario atualizacaoUsuario){
-		return serviceU.atualizarUsuario(id_Usuario, atualizacaoUsuario)
+		return serviceU.atualizarUsuario(id_usuario, atualizacaoUsuario)
 				.map(usuarioAtualizado -> ResponseEntity.status(201).body(usuarioAtualizado))
 				.orElse(ResponseEntity.status(400).body("Usuario Inexistente!"));
 	}
 	
-	@DeleteMapping("/deletar/{id_usuario}")
-	public ResponseEntity<String> deletarUsuario (@RequestParam Long id_Usuario){
-		return serviceU.deletarIdUsuario(id_Usuario)
+	@DeleteMapping("/deletar/id/")
+	public ResponseEntity<String> deletarUsuario (@RequestParam Long idUsuario){
+		return serviceU.deletarIdUsuario(idUsuario)
 				.map(usuarioDeletado -> ResponseEntity.status(400).body("Usuario não Localizado!"))
 				.orElse(ResponseEntity.status(200).body("Usuario deletado"));
 	}
