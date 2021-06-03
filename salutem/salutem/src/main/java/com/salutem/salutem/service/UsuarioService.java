@@ -42,7 +42,8 @@ public class UsuarioService {
 	public Optional<Object> atualizarUsuario(Long id_Usuario, Usuario atualizacaoUsuario){
 		Optional<Usuario> verificaIdUsuario = repositoryU.findById(id_Usuario);
 		if(verificaIdUsuario.isPresent()) {
-			verificaIdUsuario.get().setId_Usuario(atualizacaoUsuario.getId_Usuario());
+			verificaIdUsuario.get().setEmailUsuario(atualizacaoUsuario.getEmailUsuario());
+			verificaIdUsuario.get().setSenhaUsuario(atualizacaoUsuario.getSenhaUsuario());
 			return Optional.ofNullable(repositoryU.save(verificaIdUsuario.get()));
 		}else {
 			return Optional.empty();
