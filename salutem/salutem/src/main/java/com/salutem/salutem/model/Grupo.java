@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_grupo")
-public class GrupoModel {
+public class Grupo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idGrupo;
@@ -43,9 +43,9 @@ public class GrupoModel {
 	@JsonIgnoreProperties("listaGrupoUsuario")
 	private List<Usuario> listaDeUsuarios = new ArrayList<>(); 
 	
-	@OneToMany(mappedBy = "postagens", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties ("postagens")
-	private List<PostagemModel> listaDePostagens = new ArrayList<>();
+	@OneToMany(mappedBy = "grupoPostagem", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties ("grupoPostagem")
+	private List<Postagem> listaDePostagens = new ArrayList<>();
 	
 	
 
@@ -65,11 +65,11 @@ public class GrupoModel {
 		this.listaDeUsuarios = listaDeUsuarios;
 	}
 
-	public List<PostagemModel> getListaDePostagens() {
+	public List<Postagem> getListaDePostagens() {
 		return listaDePostagens;
 	}
 
-	public void setListaDePostagens(List<PostagemModel> listaDePostagens) {
+	public void setListaDePostagens(List<Postagem> listaDePostagens) {
 		this.listaDePostagens = listaDePostagens;
 	}
 

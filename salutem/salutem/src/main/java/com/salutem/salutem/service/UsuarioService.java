@@ -30,8 +30,8 @@ public class UsuarioService {
 	}
 	
 	
-	public Optional<Object> buscarUsuarioPorId(Usuario id_Usuario){
-		Optional<Usuario> buscaPorId = repositoryU.findById(id_Usuario.getId_Usuario());
+	public Optional<Object> buscarUsuarioPorId(Usuario idUsuario){
+		Optional<Usuario> buscaPorId = repositoryU.findById(idUsuario.getIdUsuario());
 		if(buscaPorId.isPresent()) {
 			return Optional.ofNullable(repositoryU);
 		} else {
@@ -39,8 +39,8 @@ public class UsuarioService {
 		}
 	}
 	
-	public Optional<Object> atualizarUsuario(Long id_Usuario, Usuario atualizacaoUsuario){
-		Optional<Usuario> verificaIdUsuario = repositoryU.findById(id_Usuario);
+	public Optional<Object> atualizarUsuario(Long idUsuario, Usuario atualizacaoUsuario){
+		Optional<Usuario> verificaIdUsuario = repositoryU.findById(idUsuario);
 		if(verificaIdUsuario.isPresent()) {
 			verificaIdUsuario.get().setEmailUsuario(atualizacaoUsuario.getEmailUsuario());
 			verificaIdUsuario.get().setSenhaUsuario(atualizacaoUsuario.getSenhaUsuario());
@@ -50,12 +50,12 @@ public class UsuarioService {
 		}
 	}
 	
-	public Optional<Object> deletarIdUsuario(Long id_Usuario){
-		Optional<Usuario> verificaIdUsuario = repositoryU.findById(id_Usuario);
+	public Optional<Object> deletarIdUsuario(Long idUsuario){
+		Optional<Usuario> verificaIdUsuario = repositoryU.findById(idUsuario);
 		if(verificaIdUsuario.isEmpty()) {
 			return Optional.ofNullable(verificaIdUsuario);
 		}else {
-			repositoryU.deleteById(id_Usuario);
+			repositoryU.deleteById(idUsuario);
 			return Optional.empty();
 		}
 	}
