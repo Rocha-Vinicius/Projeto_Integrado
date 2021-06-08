@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.salutem.salutem.model.GrupoModel;
+import com.salutem.salutem.model.Grupo;
 import com.salutem.salutem.repository.GrupoRepository;
 import com.salutem.salutem.service.GrupoService;
 
@@ -30,8 +30,8 @@ public class GrupoController {
 	private GrupoRepository repository;
 	
 	@GetMapping("/todos")
-	public ResponseEntity<List<GrupoModel>> getAll(){
-		List<GrupoModel> listaGrupos = repository.findAll();
+	public ResponseEntity<List<Grupo>> getAll(){
+		List<Grupo> listaGrupos = repository.findAll();
 		if(listaGrupos.isEmpty()) {
 			return ResponseEntity.status(204).build();
 		}else {
@@ -39,9 +39,9 @@ public class GrupoController {
 		}
 	}
 	
-	@GetMapping("/id/{id_grupo}")
-	public ResponseEntity<Optional<GrupoModel>> getById(@PathVariable(value = "id_grupo") Long idGrupo){
-		 Optional<GrupoModel> grupoExistente = repository.findById(idGrupo);
+	@GetMapping("/id/{idGrupo}")
+	public ResponseEntity<Optional<Grupo>> getById(@PathVariable(value = "idGrupo") Long idGrupo){
+		 Optional<Grupo> grupoExistente = repository.findById(idGrupo);
 		 if(grupoExistente.isEmpty()) {
 			 return ResponseEntity.status(204).build();
 		 }else {
@@ -50,8 +50,8 @@ public class GrupoController {
 	}
 	
 	@GetMapping("/pesquisar")
-	public ResponseEntity<Optional<List<GrupoModel>>> getAllByTemaGrupo(@RequestParam String temaGrupo){
-		Optional<List<GrupoModel>> listaGrupos = repository.findAllByTemaGrupoContaining(temaGrupo);
+	public ResponseEntity<Optional<List<Grupo>>> getAllByTemaGrupo(@RequestParam String temaGrupo){
+		Optional<List<Grupo>> listaGrupos = repository.findAllByTemaGrupoContaining(temaGrupo);
 		if(listaGrupos.isEmpty()) {
 			return ResponseEntity.status(204).build();
 		}else {
@@ -60,22 +60,22 @@ public class GrupoController {
 	}
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<GrupoModel> postGrupo(@RequestBody GrupoModel novoGrupo){
+	public ResponseEntity<Grupo> postGrupo(@RequestBody Grupo novoGrupo){
 		return services.cadastrarNovoGrupo(novoGrupo)
 				.map(grupoCriado -> ResponseEntity.status(201).body(grupoCriado))
 				.orElse(ResponseEntity.status(208).build());
 	}
 	
-	@PutMapping("/alterar/{id_grupo}")
-	public ResponseEntity<GrupoModel> putGrupo(@PathVariable(value = "id_grupo") Long idGrupo, 
-			@RequestBody GrupoModel atualizacaoGrupo){
+	@PutMapping("/alterar/{idGrupo}")
+	public ResponseEntity<Grupo> putGrupo(@PathVariable(value = "idGrupo") Long idGrupo, 
+			@RequestBody Grupo atualizacaoGrupo){
 		return services.alterarGrupo(idGrupo, atualizacaoGrupo)
 				.map(grupoAlterado -> ResponseEntity.status(201).body(grupoAlterado))
 				.orElse(ResponseEntity.status(204).build());
 	}
 	
-	@DeleteMapping("/deletar/{id_grupo}")
-	public ResponseEntity<Object> deleteGrupo(@PathVariable(value = "id_grupo") Long idGrupo){
+	@DeleteMapping("/deletar/{idGrupo}")
+	public ResponseEntity<Object> deleteGrupo(@PathVariable(value = "idGrupo") Long idGrupo){
 		return services.deletarGrupo(idGrupo);
 	}
 }

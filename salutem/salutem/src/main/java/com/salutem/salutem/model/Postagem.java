@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name = "tb_postagem")
-public class PostagemModel {
+public class Postagem {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -46,7 +46,7 @@ public class PostagemModel {
 	
 	@ManyToOne 
 	@JsonIgnoreProperties("listaDePostagens")
-	private GrupoModel postagens; // linkando com postagens
+	private Grupo grupoPostagem; // linkando com postagens
 	
 	@ManyToOne 
 	@JsonIgnoreProperties("listaUsuarioPostagem")
@@ -54,12 +54,12 @@ public class PostagemModel {
 	
 	
 	
-	public GrupoModel getPostagens() {
-		return postagens;
+	public Grupo getPostagens() {
+		return grupoPostagem;
 	}
 
-	public void setPostagens(GrupoModel postagens) {
-		this.postagens = postagens;
+	public void setPostagens(Grupo postagens) {
+		this.grupoPostagem = postagens;
 	}
 
 	public Usuario getUsuarioPostagem() {

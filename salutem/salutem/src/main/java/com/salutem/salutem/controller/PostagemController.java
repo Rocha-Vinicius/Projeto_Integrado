@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.salutem.salutem.model.PostagemModel;
+import com.salutem.salutem.model.Postagem;
 import com.salutem.salutem.repository.PostagemRepository;
 
 @RestController
@@ -25,34 +25,34 @@ public class PostagemController {
 	private PostagemRepository repositoryPostagem;
 	
 	@GetMapping
-	ResponseEntity<List<PostagemModel>> getAll(){
+	ResponseEntity<List<Postagem>> getAll(){
 		return ResponseEntity.status(200).body(repositoryPostagem.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	ResponseEntity<PostagemModel> getById(@PathVariable long id){
+	ResponseEntity<Postagem> getById(@PathVariable long id){
 		return repositoryPostagem.findById(id).map(ret -> ResponseEntity.status(200).body(ret)).orElse
 				(ResponseEntity.notFound().build());
 	}
 	
 	@GetMapping("/titulo/{titulo}")
-	ResponseEntity<PostagemModel> getByTitulo (@PathVariable String titulo){
+	ResponseEntity<Postagem> getByTitulo (@PathVariable String titulo){
 		return repositoryPostagem.findByTituloPostagem(titulo).map(ret -> ResponseEntity.status(200).body(ret))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@PostMapping
-	ResponseEntity<PostagemModel> postPostagem (@RequestBody PostagemModel postagem){
+	ResponseEntity<Postagem> postPostagem (@RequestBody Postagem postagem){
 		return ResponseEntity.status(201).body(repositoryPostagem.save(postagem));
 	}
 	
 	@PutMapping
-	ResponseEntity<PostagemModel> putPostagem (@RequestBody PostagemModel postagem){
+	ResponseEntity<Postagem> putPostagem (@RequestBody Postagem postagem){
 		return ResponseEntity.status(200).body(repositoryPostagem.save(postagem));
 	}
 	
 	@DeleteMapping (params = "id")
-	ResponseEntity <PostagemModel> deletePostagem (@RequestParam Long id){
+	ResponseEntity <Postagem> deletePostagem (@RequestParam Long id){
 		repositoryPostagem.deleteById(id);
 		return ResponseEntity.status(200).body(null);
 	}

@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.salutem.salutem.model.PostagemModel;
+import com.salutem.salutem.model.Postagem;
 
 @Repository
-public interface PostagemRepository extends JpaRepository<PostagemModel, Long> {
-	public Optional<PostagemModel> findByTituloPostagem (String titulo);
+public interface PostagemRepository extends JpaRepository<Postagem, Long> {
+	public Optional<Postagem> findByTituloPostagem (String titulo);
 }

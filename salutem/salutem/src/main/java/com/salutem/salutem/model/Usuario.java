@@ -22,10 +22,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tb_usuario")
 public class Usuario {
 
-
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private long id_Usuario;
+		private long idUsuario;
 		
 		@NotNull
 		@Size(min = 5, max = 45)
@@ -51,42 +50,42 @@ public class Usuario {
 		@ManyToMany
 		@JsonIgnoreProperties("listaDeUsuarios")
 		@JoinTable(
-                name = "tb_usuariogrupo", 
+                name = "tb_usuario_grupo", 
                 joinColumns = @JoinColumn(name = "fk_usuario"), //nomeando p facilitar a busca no banco
                 inverseJoinColumns = @JoinColumn(name = "fk_grupo"))
-		private List<GrupoModel> listaGrupoUsuario = new ArrayList<>(); // atributo que irá mapear as relações
+		private List<Grupo> listaGrupoUsuario = new ArrayList<>(); // atributo que irá mapear as relações
 		
 		@OneToMany(mappedBy = "usuarioPostagem", cascade = CascadeType.ALL)
 		@JsonIgnoreProperties("usuarioPostagem")
-		private List<PostagemModel> listaPostagemUsuario = new ArrayList<>();
+		private List<Postagem> listaPostagemUsuario = new ArrayList<>();
 
-		public List<GrupoModel> getListaGrupoUsuario() {
+		public List<Grupo> getListaGrupoUsuario() {
 			return listaGrupoUsuario;
 		}
 
 
-		public void setListaGrupoUsuario(List<GrupoModel> listaGrupoUsuario) {
+		public void setListaGrupoUsuario(List<Grupo> listaGrupoUsuario) {
 			this.listaGrupoUsuario = listaGrupoUsuario;
 		}
 
 
-		public List<PostagemModel> getListaPostagemUsuario() {
+		public List<Postagem> getListaPostagemUsuario() {
 			return listaPostagemUsuario;
 		}
 
 
-		public void setListaPostagemUsuario(List<PostagemModel> listaPostagemUsuario) {
+		public void setListaPostagemUsuario(List<Postagem> listaPostagemUsuario) {
 			this.listaPostagemUsuario = listaPostagemUsuario;
 		}
 
 
-		public long getId_Usuario() {
-			return id_Usuario;
+		public long getIdUsuario() {
+			return idUsuario;
 		}
 
 
-		public void setId_Usuario(long id_Usuario) {
-			this.id_Usuario = id_Usuario;
+		public void setIdUsuario(long idUsuario) {
+			this.idUsuario = idUsuario;
 		}
 
 
