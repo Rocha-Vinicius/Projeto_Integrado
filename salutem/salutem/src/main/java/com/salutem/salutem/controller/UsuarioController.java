@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.salutem.salutem.model.LoginUsuario;
 import com.salutem.salutem.model.Usuario;
 import com.salutem.salutem.repository.UsuarioRepository;
 import com.salutem.salutem.service.UsuarioService;
@@ -34,10 +35,17 @@ public class UsuarioController {
 	private UsuarioService serviceU;
 	
 	@PostMapping("/cadastrar")
-	 public ResponseEntity<Object> cadastrarUsuario (@RequestBody Usuario emailUsuario){
+	 public ResponseEntity<Usuario> cadastrarUsuario (@Valid @RequestBody Usuario emailUsuario){
 		return serviceU.cadastrarUsuario(emailUsuario)
 				.map(verificaemailUsuario -> ResponseEntity.status(201).body(verificaemailUsuario))
-				.orElse(ResponseEntity.status(400).body("Usuario Existente"));
+				.orElse(ResponseEntity.status(400).build());
+	}
+	
+	@PostMapping("/logar")
+	 public ResponseEntity<LoginUsuario> logarUsuario (@Valid @RequestBody Optional<LoginUsuario> loginUsuario){
+		return serviceU.logarUsuario(loginUsuario)
+				.map(verificarLoginUsuario -> ResponseEntity.status(201).body(verificarLoginUsuario))
+				.orElse(ResponseEntity.status(400).build());
 	}
 	
 	@GetMapping

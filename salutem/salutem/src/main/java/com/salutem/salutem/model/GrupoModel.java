@@ -112,7 +112,5 @@ public class GrupoModel {
 	public void setImgGrupo(String imgGrupo) {
 		this.urlImagemGrupo = imgGrupo;
 	}
-	
-	
 
 }
