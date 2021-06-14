@@ -22,122 +22,102 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tb_usuario")
 public class Usuario {
 
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private long idUsuario;
-		
-		@NotNull
-		@Size(min = 5, max = 45)
-		private String nomeUsuario;
-		
-		@NotNull
-		@Size(min = 5, max = 45)
-		private String emailUsuario;
-		
-		@NotNull
-		@Size (min = 8, max = 20)
-		private String senhaUsuario;
-		
-		@Size(min = 6, max = 6)
-		private String crmUsuario;
-		
-		
-		@Size(min = 5, max= 45)
-		private String urlImagemUsuario;
-		
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idUsuario;
 
-		// Criando o relacionamento entre usuario e grupo
-		@ManyToMany
-		@JsonIgnoreProperties("listaDeUsuarios")
-		@JoinTable(
-                name = "tb_usuario_grupo", 
-                joinColumns = @JoinColumn(name = "fk_usuario"), //nomeando p facilitar a busca no banco
-                inverseJoinColumns = @JoinColumn(name = "fk_grupo"))
-		private List<Grupo> listaGrupoUsuario = new ArrayList<>(); // atributo que irá mapear as relações
-		
-		@OneToMany(mappedBy = "usuarioPostagem", cascade = CascadeType.ALL)
-		@JsonIgnoreProperties("usuarioPostagem")
-		private List<Postagem> listaPostagemUsuario = new ArrayList<>();
+	@NotNull
+	@Size(min = 5, max = 45)
+	private String nomeUsuario;
 
-		public List<Grupo> getListaGrupoUsuario() {
-			return listaGrupoUsuario;
-		}
+	@NotNull
+	@Size(min = 5, max = 45)
+	private String emailUsuario;
 
+	@NotNull
+	@Size(min = 8)
+	private String senhaUsuario;
 
-		public void setListaGrupoUsuario(List<Grupo> listaGrupoUsuario) {
-			this.listaGrupoUsuario = listaGrupoUsuario;
-		}
+	@Size(min = 6, max = 6)
+	private String crmUsuario;
 
+	@Size(min = 5, max = 45)
+	private String urlImagemUsuario;
 
-		public List<Postagem> getListaPostagemUsuario() {
-			return listaPostagemUsuario;
-		}
+	// Criando o relacionamento entre usuario e grupo
+	@ManyToMany
+	@JsonIgnoreProperties("listaDeUsuarios")
+	@JoinTable(name = "tb_usuario_grupo", joinColumns = @JoinColumn(name = "fk_usuario"), // nomeando p facilitar a
+																							// busca no banco
+			inverseJoinColumns = @JoinColumn(name = "fk_grupo"))
+	private List<Grupo> listaGrupoUsuario = new ArrayList<>(); // atributo que irá mapear as relações
 
+	@OneToMany(mappedBy = "usuarioPostagem", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("usuarioPostagem")
+	private List<Postagem> listaPostagemUsuario = new ArrayList<>();
 
-		public void setListaPostagemUsuario(List<Postagem> listaPostagemUsuario) {
-			this.listaPostagemUsuario = listaPostagemUsuario;
-		}
+	public long getIdUsuario() {
+		return idUsuario;
+	}
 
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-		public long getIdUsuario() {
-			return idUsuario;
-		}
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
 
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
 
-		public void setIdUsuario(long idUsuario) {
-			this.idUsuario = idUsuario;
-		}
+	public String getEmailUsuario() {
+		return emailUsuario;
+	}
 
+	public void setEmailUsuario(String emailUsuario) {
+		this.emailUsuario = emailUsuario;
+	}
 
-		public String getNomeUsuario() {
-			return nomeUsuario;
-		}
+	public String getSenhaUsuario() {
+		return senhaUsuario;
+	}
 
+	public void setSenhaUsuario(String senhaUsuario) {
+		this.senhaUsuario = senhaUsuario;
+	}
 
-		public void setNomeUsuario(String nomeUsuario) {
-			this.nomeUsuario = nomeUsuario;
-		}
+	public String getCrmUsuario() {
+		return crmUsuario;
+	}
 
+	public void setCrmUsuario(String crmUsuario) {
+		this.crmUsuario = crmUsuario;
+	}
 
-		public String getEmailUsuario() {
-			return emailUsuario;
-		}
+	public String getUrlImagemUsuario() {
+		return urlImagemUsuario;
+	}
 
+	public void setUrlImagemUsuario(String urlImagemUsuario) {
+		this.urlImagemUsuario = urlImagemUsuario;
+	}
 
-		public void setEmailUsuario(String emailUsuario) {
-			this.emailUsuario = emailUsuario;
-		}
+	public List<Grupo> getListaGrupoUsuario() {
+		return listaGrupoUsuario;
+	}
 
+	public void setListaGrupoUsuario(List<Grupo> listaGrupoUsuario) {
+		this.listaGrupoUsuario = listaGrupoUsuario;
+	}
 
-		public String getSenhaUsuario() {
-			return senhaUsuario;
-		}
+	public List<Postagem> getListaPostagemUsuario() {
+		return listaPostagemUsuario;
+	}
 
+	public void setListaPostagemUsuario(List<Postagem> listaPostagemUsuario) {
+		this.listaPostagemUsuario = listaPostagemUsuario;
+	}
 
-		public void setSenhaUsuario(String senhaUsuario) {
-			this.senhaUsuario = senhaUsuario;
-		}
-
-
-		public String getCrmUsuario() {
-			return crmUsuario;
-		}
-
-
-		public void setCrmUsuario(String crmUsuario) {
-			this.crmUsuario = crmUsuario;
-		}
-
-
-		public String getUrlImagemUsuario() {
-			return urlImagemUsuario;
-		}
-
-
-		public void setUrlImagemUsuario(String urlImagemUsuario) {
-			this.urlImagemUsuario = urlImagemUsuario;
-		}
-
-		
-	
 }

@@ -3,8 +3,6 @@ package com.salutem.salutem.model;
 
 import java.util.Date;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,30 +43,12 @@ public class Postagem {
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 	
 	@ManyToOne 
-	@JsonIgnoreProperties("listaDePostagens")
+	@JsonIgnoreProperties({"listaDePostagens"})
 	private Grupo grupoPostagem; // linkando com postagens
 	
 	@ManyToOne 
-	@JsonIgnoreProperties("listaUsuarioPostagem")
+	@JsonIgnoreProperties({"listaPostagemUsuario", "postagens"})
 	private Usuario usuarioPostagem;
-	
-	
-	
-	public Grupo getPostagens() {
-		return grupoPostagem;
-	}
-
-	public void setPostagens(Grupo postagens) {
-		this.grupoPostagem = postagens;
-	}
-
-	public Usuario getUsuarioPostagem() {
-		return usuarioPostagem;
-	}
-
-	public void setUsuarioPostagem(Usuario usuarioPostagem) {
-		this.usuarioPostagem = usuarioPostagem;
-	}
 
 	public Long getIdPostagem() {
 		return idPostagem;
@@ -116,6 +96,22 @@ public class Postagem {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public Grupo getGrupoPostagem() {
+		return grupoPostagem;
+	}
+
+	public void setGrupoPostagem(Grupo grupoPostagem) {
+		this.grupoPostagem = grupoPostagem;
+	}
+
+	public Usuario getUsuarioPostagem() {
+		return usuarioPostagem;
+	}
+
+	public void setUsuarioPostagem(Usuario usuarioPostagem) {
+		this.usuarioPostagem = usuarioPostagem;
 	}
 	
 }

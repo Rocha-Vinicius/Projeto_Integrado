@@ -1,10 +1,14 @@
 package com.salutem.salutem.service;
 
+import java.nio.charset.Charset;
 import java.util.Optional;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.salutem.salutem.model.LoginUsuario;
 import com.salutem.salutem.model.Usuario;
 import com.salutem.salutem.repository.UsuarioRepository;
 
@@ -20,11 +24,14 @@ public class UsuarioService {
 	 * @return
 	 */
 	
-	public Optional<Object> cadastrarUsuario (Usuario novoUsuario){
-		Optional<Object> verificaemailUsuario = repositoryU.findByEmailUsuario(novoUsuario.getEmailUsuario());
+	public Optional<Usuario> cadastrarUsuario (Usuario novoUsuario){
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Optional<Usuario> verificaemailUsuario = repositoryU.findByEmailUsuario(novoUsuario.getEmailUsuario());
 		if(verificaemailUsuario.isPresent()) {
 			return Optional.empty();
 		} else {
+			String senhaEncoder = encoder.encode(novoUsuario.getSenhaUsuario());
+			novoUsuario.setSenhaUsuario(senhaEncoder);
 			return Optional.ofNullable(repositoryU.save(novoUsuario));
 		}
 	}
@@ -41,7 +48,10 @@ public class UsuarioService {
 	
 	public Optional<Object> atualizarUsuario(Long idUsuario, Usuario atualizacaoUsuario){
 		Optional<Usuario> verificaIdUsuario = repositoryU.findById(idUsuario);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		if(verificaIdUsuario.isPresent()) {
+			String senhaEncoder = encoder.encode(atualizacaoUsuario.getSenhaUsuario());
+			atualizacaoUsuario.setSenhaUsuario(senhaEncoder);
 			verificaIdUsuario.get().setEmailUsuario(atualizacaoUsuario.getEmailUsuario());
 			verificaIdUsuario.get().setSenhaUsuario(atualizacaoUsuario.getSenhaUsuario());
 			return Optional.ofNullable(repositoryU.save(verificaIdUsuario.get()));
@@ -59,4 +69,24 @@ public class UsuarioService {
 			return Optional.empty();
 		}
 	}
+	
+	public Optional<LoginUsuario> logarUsuario(Optional<LoginUsuario> usuario){
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Optional<Usuario> user = repositoryU.findByEmailUsuario(usuario.get().getEmailUsuario());
+		if(user.isPresent()) {
+			if (encoder.matches(usuario.get().getSenhaUsuario(), user.get().getSenhaUsuario())){
+					String auth = usuario.get().getEmailUsuario() + ":" + usuario.get().getSenhaUsuario();
+					byte[] encoderAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+					String authHeader = "Basic " + new String(encoderAuth);
+					usuario.get().setTokenUsuario(authHeader);
+					usuario.get().setNomeUsuario(user.get().getNomeUsuario());
+					usuario.get().setEmailUsuario(user.get().getEmailUsuario());
+					return usuario;
+				}
+		}
+		return null;
+		
+		
+	}
+	
 }

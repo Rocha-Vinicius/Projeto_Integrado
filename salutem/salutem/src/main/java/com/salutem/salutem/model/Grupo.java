@@ -46,32 +46,6 @@ public class Grupo {
 	@OneToMany(mappedBy = "grupoPostagem", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties ("grupoPostagem")
 	private List<Postagem> listaDePostagens = new ArrayList<>();
-	
-	
-
-	public String getUrlImagemGrupo() {
-		return urlImagemGrupo;
-	}
-
-	public void setUrlImagemGrupo(String urlImagemGrupo) {
-		this.urlImagemGrupo = urlImagemGrupo;
-	}
-
-	public List<Usuario> getListaDeUsuarios() {
-		return listaDeUsuarios;
-	}
-
-	public void setListaDeUsuarios(List<Usuario> listaDeUsuarios) {
-		this.listaDeUsuarios = listaDeUsuarios;
-	}
-
-	public List<Postagem> getListaDePostagens() {
-		return listaDePostagens;
-	}
-
-	public void setListaDePostagens(List<Postagem> listaDePostagens) {
-		this.listaDePostagens = listaDePostagens;
-	}
 
 	public Long getIdGrupo() {
 		return idGrupo;
@@ -105,14 +79,28 @@ public class Grupo {
 		this.descricaoGrupo = descricaoGrupo;
 	}
 
-	public String getImgGrupo() {
+	public String getUrlImagemGrupo() {
 		return urlImagemGrupo;
 	}
 
-	public void setImgGrupo(String imgGrupo) {
-		this.urlImagemGrupo = imgGrupo;
+	public void setUrlImagemGrupo(String urlImagemGrupo) {
+		this.urlImagemGrupo = urlImagemGrupo;
+	}
+
+	public List<Usuario> getListaDeUsuarios() {
+		return listaDeUsuarios;
+	}
+
+	public void setListaDeUsuarios(List<Usuario> listaDeUsuarios) {
+		this.listaDeUsuarios = listaDeUsuarios;
+	}
+
+	public List<Postagem> getListaDePostagens() {
+		return listaDePostagens;
+	}
+
+	public void setListaDePostagens(List<Postagem> listaDePostagens) {
+		this.listaDePostagens = listaDePostagens;
 	}
 	
-	
-
 }

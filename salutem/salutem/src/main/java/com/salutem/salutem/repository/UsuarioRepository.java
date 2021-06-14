@@ -19,6 +19,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	public Optional<Object> findByNomeUsuario(String nomeUsuario);
 	
-	public Optional<Object> findByEmailUsuario(String emailUsuario);
+	public Optional<Usuario> findByEmailUsuario(String emailUsuario);
 }
 
