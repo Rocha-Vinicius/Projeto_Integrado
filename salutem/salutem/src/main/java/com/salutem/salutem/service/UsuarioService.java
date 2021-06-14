@@ -48,7 +48,10 @@ public class UsuarioService {
 	
 	public Optional<Object> atualizarUsuario(Long idUsuario, Usuario atualizacaoUsuario){
 		Optional<Usuario> verificaIdUsuario = repositoryU.findById(idUsuario);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		if(verificaIdUsuario.isPresent()) {
+			String senhaEncoder = encoder.encode(atualizacaoUsuario.getSenhaUsuario());
+			atualizacaoUsuario.setSenhaUsuario(senhaEncoder);
 			verificaIdUsuario.get().setEmailUsuario(atualizacaoUsuario.getEmailUsuario());
 			verificaIdUsuario.get().setSenhaUsuario(atualizacaoUsuario.getSenhaUsuario());
 			return Optional.ofNullable(repositoryU.save(verificaIdUsuario.get()));
