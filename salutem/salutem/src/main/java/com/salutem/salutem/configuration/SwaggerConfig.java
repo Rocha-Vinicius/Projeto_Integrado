@@ -48,8 +48,10 @@ public class SwaggerConfig {
 
 				add(new ResponseBuilder().code("200").description("Sucesso!").build());
 				add(new ResponseBuilder().code("201").description("Objeto Criado!").build());
+				add(new ResponseBuilder().code("204").description("Vazio").build());
+				add(new ResponseBuilder().code("208").description("Já reportado").build());
 				add(new ResponseBuilder().code("401").description("Não Autorizado!").build());
-				add(new ResponseBuilder().code("403").description("Proibido!").build());
+				add(new ResponseBuilder().code("400").description("Má Requisição").build());
 				add(new ResponseBuilder().code("404").description("Não Encontrado!").build());
 				add(new ResponseBuilder().code("500").description("Erro!").build());
 			}
