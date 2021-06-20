@@ -14,10 +14,13 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table (name = "tb_postagem")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPostagem")
 public class Postagem {
 	
 	@Id
@@ -43,11 +46,11 @@ public class Postagem {
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 	
 	@ManyToOne 
-	@JsonIgnoreProperties({"listaDePostagens"})
+	@JsonIgnoreProperties("listaDePostagens")
 	private Grupo grupoPostagem; // linkando com postagens
 	
 	@ManyToOne 
-	@JsonIgnoreProperties({"listaPostagemUsuario", "postagens"})
+	@JsonIgnoreProperties("listaPostagemUsuario")
 	private Usuario usuarioPostagem;
 
 	public Long getIdPostagem() {

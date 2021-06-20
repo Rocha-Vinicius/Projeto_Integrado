@@ -5,16 +5,21 @@ import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.salutem.salutem.model.Grupo;
 import com.salutem.salutem.model.LoginUsuario;
 import com.salutem.salutem.model.Usuario;
+import com.salutem.salutem.repository.GrupoRepository;
 import com.salutem.salutem.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-
+	@Autowired
+	public GrupoRepository repositoryG;
+	
 	@Autowired
 	public UsuarioRepository repositoryU;
 	
@@ -85,7 +90,19 @@ public class UsuarioService {
 				}
 		}
 		return null;
-		
+	}
+	
+	public ResponseEntity<Grupo> cadastrarGrupo(Grupo novoGrupo, Long idCriador){
+		Optional<Grupo> grupoExistente = repositoryG.findByTemaGrupo(novoGrupo.getTemaGrupo());
+		Optional<Usuario> usuarioExistente = repositoryU.findById(idCriador);
+		if(grupoExistente.isPresent()) {
+			return ResponseEntity.status(404).build();
+		}else {
+			Optional.ofNullable(repositoryG.save(novoGrupo));
+			usuarioExistente.get().getListaGrupoUsuario().add(novoGrupo);
+			repositoryU.save(usuarioExistente.get());
+			return ResponseEntity.status(201).body(novoGrupo);
+		}
 		
 	}
 	

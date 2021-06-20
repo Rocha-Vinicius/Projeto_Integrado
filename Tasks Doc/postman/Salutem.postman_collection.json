@@ -1,0 +1,504 @@
+{
+	"info": {
+		"_postman_id": "d8b812e4-e6fc-4a97-a481-ebf6fa8acc9a",
+		"name": "Salutem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Grupo",
+			"item": [
+				{
+					"name": "GetAll | Grupo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/grupo/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"grupo",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById | Grupo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/grupo/id/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"grupo",
+								"id",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllByTemaGrupo | Grupo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/grupo/pesquisar?temaGrupo=FDS",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"grupo",
+								"pesquisar"
+							],
+							"query": [
+								{
+									"key": "temaGrupo",
+									"value": "FDS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put | Grupo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idGrupo\": 3,\n    \"categoriaGrupo\": \"Informatica\",\n    \"descricaoGrupo\": \"Sera mesmo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/grupo/alterar/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"grupo",
+								"alterar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete | Grupo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/grupo/deletar/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"grupo",
+								"deletar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "GetAll | Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByNomeUsuario | Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuario/buscar/?nomeUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"buscar",
+								""
+							],
+							"query": [
+								{
+									"key": "nomeUsuario",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar | Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomeUsuario\": \"RRRRRRRRRRRRR\",\n    \"emailUsuario\": \"RRRRRRRRRRRRR\",\n    \"senhaUsuario\": \"RRRRRRRRRRRRR\",\n    \"crmUsuario\": \"121313\",\n    \"urlImagemUsuario\": \"RRRRRRRRRRRRR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/cadastrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"cadastrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logar | Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"emailUsuario\": \"RRRRRRRRRRRRR\",\n    \"senhaUsuario\": \"RRRRRRRRRRRRR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/logar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"logar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Grupo | Usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic UlJSUlJSUlJSUlJSUjpSUlJSUlJSUlJSUlJS",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"temaGrupo\": \"RRRRRRRRRRRRR\",\n    \"categoriaGrupo\": \"RESDFTERD\",\n    \"descricaoGrupo\": \"RESDFTERD\",\n    \"urlImagemGrupo\": \"Testatata\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/cadastrar/grupo/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"cadastrar",
+								"grupo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put | Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic VGVzdGV0ZXN0ZTpUZXN0ZXRlc3Rl",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomeUsuario\": \"\",\n    \"emailUsuario\": \"\",\n    \"senhaUsuario\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/atualizar/{id_usuario}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"atualizar",
+								"{id_usuario}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete | Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuario/deletar/id/?idUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"deletar",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "idUsuario",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Postagem",
+			"item": [
+				{
+					"name": "GetAll | Postagem",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/postagem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"postagem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById | Postagem",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/postagem/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"postagem",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByTitulo | Postagem",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/postagem/titulo/{titulo}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"postagem",
+								"titulo",
+								"{titulo}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nova Postagem | Postagem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic UlJSUlJSUlJSUlJSUjpSUlJSUlJSUlJSUlJS",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tituloPostagem\": \"fdsfdsfds\",\n    \"descricaoPostagem\": \"dfsfsdf\",\n    \"urlImagemPostagem\": \"fdsfdsfds\",\n    \"especialidadePostagem\": \"fsdfsd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/postagem?usuarioPostagem=RRRRRRRRRRRRR&grupoPostagem=RRRRRRRRRRRRR",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"postagem"
+							],
+							"query": [
+								{
+									"key": "usuarioPostagem",
+									"value": "RRRRRRRRRRRRR"
+								},
+								{
+									"key": "grupoPostagem",
+									"value": "RRRRRRRRRRRRR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put | Postagem",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idPostagem\": ,\n    \"tituloPostagem\": \"\",\n    \"descricaoPostagem\": \"\",\n    \"urlImagemPostagem\": \"\",\n    \"especialidadePostagem\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/postagem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"postagem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete | Postagem",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/postagem?idPostagem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"postagem"
+							],
+							"query": [
+								{
+									"key": "idPostagem",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

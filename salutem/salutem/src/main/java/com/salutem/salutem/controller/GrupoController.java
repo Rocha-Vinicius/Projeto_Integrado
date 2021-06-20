@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,13 +56,6 @@ public class GrupoController {
 		}else {
 			return ResponseEntity.status(HttpStatus.CREATED).body(listaGrupos);
 		}
-	}
-	
-	@PostMapping("/cadastrar")
-	public ResponseEntity<Grupo> postGrupo(@RequestBody Grupo novoGrupo){
-		return services.cadastrarNovoGrupo(novoGrupo)
-				.map(grupoCriado -> ResponseEntity.status(201).body(grupoCriado))
-				.orElse(ResponseEntity.status(208).build());
 	}
 	
 	@PutMapping("/alterar/{idGrupo}")
