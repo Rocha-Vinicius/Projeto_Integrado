@@ -35,7 +35,7 @@ public class UsuarioController {
 	private UsuarioService serviceU;
 	
 	@PostMapping("/cadastrar")
-	 public ResponseEntity<Usuario> cadastrarUsuario (@Valid @RequestBody Usuario emailUsuario){
+	 public ResponseEntity<Usuario> cadastrarUsuario (@RequestBody Usuario emailUsuario){
 		return serviceU.cadastrarUsuario(emailUsuario)
 				.map(verificaemailUsuario -> ResponseEntity.status(201).body(verificaemailUsuario))
 				.orElse(ResponseEntity.status(400).build());
