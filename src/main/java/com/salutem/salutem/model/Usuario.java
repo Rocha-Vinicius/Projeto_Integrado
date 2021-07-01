@@ -51,7 +51,7 @@ public class Usuario {
 																							// busca no banco
 			inverseJoinColumns = @JoinColumn(name = "fk_grupo"))
 	private List<Grupo> listaGrupoUsuario = new ArrayList<>(); // atributo que irá mapear as relações
-
+	
 	@OneToMany(mappedBy = "usuarioPostagem", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuarioPostagem")
 	private List<Postagem> listaPostagemUsuario = new ArrayList<>();
