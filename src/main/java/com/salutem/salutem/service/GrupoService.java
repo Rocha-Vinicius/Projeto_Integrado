@@ -32,7 +32,7 @@ public class GrupoService {
 		Optional<Grupo> grupoExistente = repositoryG.findById(idGrupo);
 		if(grupoExistente.isPresent()) {
 			repositoryG.deleteById(idGrupo);
-			return ResponseEntity.status(200).body("Item removido");
+			return ResponseEntity.status(200).build();
 		}else {
 			return ResponseEntity.status(404).build();
 		}
