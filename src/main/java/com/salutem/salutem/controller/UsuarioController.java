@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.salutem.salutem.model.Grupo;
 import com.salutem.salutem.model.LoginUsuario;
 import com.salutem.salutem.model.Usuario;
 import com.salutem.salutem.repository.UsuarioRepository;
@@ -35,7 +36,7 @@ public class UsuarioController {
 	private UsuarioService serviceU;
 	
 	@PostMapping("/cadastrar")
-	 public ResponseEntity<Usuario> cadastrarUsuario (@RequestBody Usuario emailUsuario){
+	 public ResponseEntity<Usuario> cadastrarUsuario (@Valid @RequestBody Usuario emailUsuario){
 		return serviceU.cadastrarUsuario(emailUsuario)
 				.map(verificaemailUsuario -> ResponseEntity.status(201).body(verificaemailUsuario))
 				.orElse(ResponseEntity.status(400).build());
@@ -46,6 +47,11 @@ public class UsuarioController {
 		return serviceU.logarUsuario(loginUsuario)
 				.map(verificarLoginUsuario -> ResponseEntity.status(201).body(verificarLoginUsuario))
 				.orElse(ResponseEntity.status(400).build());
+	}
+	
+	@PostMapping("/cadastrar/grupo/{id_usuario}")
+	public ResponseEntity<Grupo> criarGrupo(@Valid @RequestBody Grupo novoGrupo, @PathVariable(value = "id_usuario") Long idGrupo){
+		return serviceU.cadastrarGrupo(novoGrupo, idGrupo);
 	}
 	
 	@GetMapping

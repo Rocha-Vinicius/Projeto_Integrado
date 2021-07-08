@@ -14,21 +14,14 @@ public class GrupoService {
 	@Autowired
 	private GrupoRepository repositoryG;
 	
-	public Optional<Grupo> cadastrarNovoGrupo(Grupo novoGrupo){
-		Optional<Grupo> grupoExistente = repositoryG.findByTemaGrupo(novoGrupo.getTemaGrupo());
-		if(grupoExistente.isPresent()) {
-			return Optional.empty();
-		}else {
-			return Optional.ofNullable(repositoryG.save(novoGrupo));
-		}
-	}
-	
 	public Optional<Grupo> alterarGrupo(Long idGrupo, Grupo atualizaGrupo){
 		Optional<Grupo> grupoExistente = repositoryG.findById(idGrupo);
 		
 		if(grupoExistente.isPresent()) {
 			grupoExistente.get().setCategoriaGrupo(atualizaGrupo.getCategoriaGrupo());
 			grupoExistente.get().setDescricaoGrupo(atualizaGrupo.getDescricaoGrupo());
+			grupoExistente.get().setTemaGrupo(atualizaGrupo.getTemaGrupo());
+			grupoExistente.get().setUrlImagemGrupo(atualizaGrupo.getUrlImagemGrupo());
 			return Optional.ofNullable(repositoryG.save(grupoExistente.get()));
 		}else {
 			return Optional.empty();

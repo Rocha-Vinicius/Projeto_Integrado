@@ -16,10 +16,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tb_usuario")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idUsuario")
 public class Usuario {
 
 	@Id
@@ -27,7 +30,7 @@ public class Usuario {
 	private long idUsuario;
 
 	@NotNull
-	@Size(min = 3, max = 45)
+	@Size(min = 5, max = 45)
 	private String nomeUsuario;
 
 	@NotNull
@@ -35,7 +38,7 @@ public class Usuario {
 	private String emailUsuario;
 
 	@NotNull
-	@Size(min = 6)
+	@Size(min = 8)
 	private String senhaUsuario;
 
 	@Size(min = 6, max = 6)
@@ -53,7 +56,7 @@ public class Usuario {
 	private List<Grupo> listaGrupoUsuario = new ArrayList<>(); // atributo que irá mapear as relações
 	
 	@OneToMany(mappedBy = "usuarioPostagem", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("usuarioPostagem")
+	@JsonIgnoreProperties
 	private List<Postagem> listaPostagemUsuario = new ArrayList<>();
 
 	public long getIdUsuario() {

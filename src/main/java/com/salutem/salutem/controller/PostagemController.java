@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.salutem.salutem.model.Postagem;
 import com.salutem.salutem.repository.PostagemRepository;
+import com.salutem.salutem.service.PostagemService;
 
 @RestController
 @CrossOrigin("*")
@@ -25,6 +26,9 @@ public class PostagemController {
 		
 	@Autowired
 	private PostagemRepository repositoryPostagem;
+	
+	@Autowired
+	private PostagemService servicesPostagem;
 	
 	@GetMapping
 	ResponseEntity<List<Postagem>> getAll(){
@@ -44,8 +48,9 @@ public class PostagemController {
 	}
 	
 	@PostMapping
-	ResponseEntity<Postagem> postPostagem (@RequestBody Postagem postagem){
-		return ResponseEntity.status(201).body(repositoryPostagem.save(postagem));
+	ResponseEntity<Postagem> postPostagem (@RequestBody Postagem postagem, 
+			@RequestParam String usuarioPostagem, @RequestParam String grupoPostagem){
+		return servicesPostagem.criarPostagem(postagem, grupoPostagem, usuarioPostagem);
 	}
 	
 	@PutMapping
