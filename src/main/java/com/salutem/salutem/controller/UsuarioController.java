@@ -35,6 +35,12 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService serviceU;
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<Usuario> getById (@PathVariable long id){
+		return repositoryU.findById(id).map(resp -> ResponseEntity.status(200).body(resp))
+				.orElse(ResponseEntity.status(404).build());
+	}
+	
 	@PostMapping("/cadastrar")
 	 public ResponseEntity<Usuario> cadastrarUsuario (@Valid @RequestBody Usuario emailUsuario){
 		return serviceU.cadastrarUsuario(emailUsuario)
