@@ -91,8 +91,8 @@ public class UsuarioController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Usuario> deletarUsuario (@PathVariable long idUsuario){
-		return serviceU.deletarIdUsuario(idUsuario);
+	public ResponseEntity<Usuario> deletarUsuario (@PathVariable long id){
+		return serviceU.deletarIdUsuario(id);
 	}
 
 }
