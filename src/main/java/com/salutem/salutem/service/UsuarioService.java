@@ -59,6 +59,8 @@ public class UsuarioService {
 			atualizacaoUsuario.setSenhaUsuario(senhaEncoder);
 			verificaIdUsuario.get().setEmailUsuario(atualizacaoUsuario.getEmailUsuario());
 			verificaIdUsuario.get().setSenhaUsuario(atualizacaoUsuario.getSenhaUsuario());
+			verificaIdUsuario.get().setNomeUsuario(atualizacaoUsuario.getNomeUsuario());
+			verificaIdUsuario.get().setUrlImagemUsuario(atualizacaoUsuario.getUrlImagemUsuario());
 			return Optional.ofNullable(repositoryU.save(verificaIdUsuario.get()));
 		}else {
 			return Optional.empty();
