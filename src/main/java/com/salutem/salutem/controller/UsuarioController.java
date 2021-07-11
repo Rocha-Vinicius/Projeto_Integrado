@@ -90,11 +90,11 @@ public class UsuarioController {
 				.orElse(ResponseEntity.status(400).body("Usuario Inexistente!"));
 	}
 	
-	@DeleteMapping("/deletar/id/")
-	public ResponseEntity<String> deletarUsuario (@RequestParam Long idUsuario){
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deletarUsuario (@PathVariable long idUsuario){
 		return serviceU.deletarIdUsuario(idUsuario)
-				.map(usuarioDeletado -> ResponseEntity.status(400).body("Usuario não Localizado!"))
-				.orElse(ResponseEntity.status(200).body("Usuario deletado"));
+				.map(usuarioDeletado -> ResponseEntity.status(400).build())
+				.orElse(ResponseEntity.status(200).build());
 	}
 
 }
