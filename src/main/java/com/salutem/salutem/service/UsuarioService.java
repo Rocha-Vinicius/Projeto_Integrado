@@ -67,13 +67,14 @@ public class UsuarioService {
 		}
 	}
 	
-	public Optional<Object> deletarIdUsuario(Long idUsuario){
+	public ResponseEntity<Usuario> deletarIdUsuario(Long idUsuario){
 		Optional<Usuario> verificaIdUsuario = repositoryU.findById(idUsuario);
-		if(verificaIdUsuario.isEmpty()) {
-			return Optional.ofNullable(verificaIdUsuario);
+		if(verificaIdUsuario.isPresent()) {
+			repositoryU.deleteById(idUsuario);
+			return ResponseEntity.status(200).build();
 		}else {
 			repositoryU.deleteById(idUsuario);
-			return Optional.empty();
+			return ResponseEntity.status(404).build();
 		}
 	}
 	
