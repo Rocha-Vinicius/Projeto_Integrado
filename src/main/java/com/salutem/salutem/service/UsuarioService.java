@@ -51,7 +51,7 @@ public class UsuarioService {
 		}
 	}
 	
-	public Optional<Usuario> atualizarUsuario(Long idUsuario, Usuario atualizacaoUsuario){
+	public Optional<Usuario> atualizarUsuario(long idUsuario, Usuario atualizacaoUsuario){
 		Optional<Usuario> verificaIdUsuario = repositoryU.findById(idUsuario);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		if(verificaIdUsuario.isPresent()) {
@@ -67,7 +67,7 @@ public class UsuarioService {
 		}
 	}
 	
-	public ResponseEntity<Usuario> deletarIdUsuario(Long idUsuario){
+	public ResponseEntity<Usuario> deletarIdUsuario(long idUsuario){
 		Optional<Usuario> verificaIdUsuario = repositoryU.findById(idUsuario);
 		if(verificaIdUsuario.isPresent()) {
 			repositoryU.deleteById(idUsuario);
