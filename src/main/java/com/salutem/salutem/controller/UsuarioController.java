@@ -82,11 +82,11 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/atualizar/{idUsuario}")
-	public ResponseEntity<Object> atualizarUsuario (@PathVariable Long idUsuario, 
-			@Valid @RequestBody Usuario atualizacaoUsuario){
+	public ResponseEntity<Usuario> atualizarUsuario (@PathVariable Long idUsuario, 
+			@RequestBody Usuario atualizacaoUsuario){
 		return serviceU.atualizarUsuario(idUsuario, atualizacaoUsuario)
 				.map(usuarioAtualizado -> ResponseEntity.status(201).body(usuarioAtualizado))
-				.orElse(ResponseEntity.status(400).body("Usuario Inexistente!"));
+				.orElse(ResponseEntity.status(400).build());
 	}
 	
 	@DeleteMapping("/{id}")

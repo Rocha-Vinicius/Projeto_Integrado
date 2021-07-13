@@ -51,7 +51,7 @@ public class UsuarioService {
 		}
 	}
 	
-	public Optional<Object> atualizarUsuario(Long idUsuario, Usuario atualizacaoUsuario){
+	public Optional<Usuario> atualizarUsuario(Long idUsuario, Usuario atualizacaoUsuario){
 		Optional<Usuario> verificaIdUsuario = repositoryU.findById(idUsuario);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		if(verificaIdUsuario.isPresent()) {
