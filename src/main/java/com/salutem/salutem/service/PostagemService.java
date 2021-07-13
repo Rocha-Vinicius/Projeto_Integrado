@@ -24,9 +24,9 @@ public class PostagemService {
 	@Autowired
 	UsuarioRepository repositoryU;
 	
-	public ResponseEntity<Postagem> criarPostagem(Postagem novaPostagem, String grupoPostagem, String usuarioPostagem){
-		Optional<Grupo> grupoExistente = repositoryG.findByTemaGrupo(grupoPostagem);
-		Optional<Usuario> usuarioExistente = repositoryU.findByEmailUsuario(usuarioPostagem);
+	public ResponseEntity<Postagem> criarPostagem(Postagem novaPostagem, long idGrupo, long idUsuario){
+		Optional<Grupo> grupoExistente = repositoryG.findById(idGrupo);
+		Optional<Usuario> usuarioExistente = repositoryU.findById(idUsuario);
 		if(grupoExistente.isPresent() && usuarioExistente.isPresent()) {
 			novaPostagem.setUsuarioPostagem(usuarioExistente.get());
 			novaPostagem.setGrupoPostagem(grupoExistente.get());

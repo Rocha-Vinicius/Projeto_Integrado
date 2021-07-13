@@ -14,6 +14,11 @@ public class GrupoService {
 	@Autowired
 	private GrupoRepository repositoryG;
 	
+	
+	public Optional<Grupo> criarGrupo (Grupo novoGrupo){
+		return Optional.ofNullable(repositoryG.save(novoGrupo));
+	}
+	
 	public Optional<Grupo> alterarGrupo(Long idGrupo, Grupo atualizaGrupo){
 		Optional<Grupo> grupoExistente = repositoryG.findById(idGrupo);
 		

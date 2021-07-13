@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.salutem.salutem.model.Postagem;
@@ -47,10 +46,10 @@ public class PostagemController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@PostMapping
+	@PostMapping ("/{idGrupo}/{idUsuario}")
 	ResponseEntity<Postagem> postPostagem (@RequestBody Postagem postagem, 
-			@RequestParam String usuarioPostagem, @RequestParam String grupoPostagem){
-		return servicesPostagem.criarPostagem(postagem, grupoPostagem, usuarioPostagem);
+			@PathVariable long idGrupo, @PathVariable long idUsuario ){
+		return servicesPostagem.criarPostagem(postagem, idGrupo, idUsuario);
 	}
 	
 	@PutMapping
@@ -58,8 +57,8 @@ public class PostagemController {
 		return ResponseEntity.status(200).body(repositoryPostagem.save(postagem));
 	}
 	
-	@DeleteMapping (params = "id")
-	ResponseEntity <Postagem> deletePostagem (@RequestParam Long id){
+	@DeleteMapping ("/{id}")
+	ResponseEntity <Postagem> deletePostagem (@PathVariable long id){
 		repositoryPostagem.deleteById(id);
 		return ResponseEntity.status(200).body(null);
 	}

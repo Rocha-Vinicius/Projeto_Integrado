@@ -98,7 +98,7 @@ public class UsuarioService {
 		return null;
 	}
 	
-	public ResponseEntity<Grupo> cadastrarGrupo(Grupo novoGrupo, Long idCriador){
+	public ResponseEntity<Grupo> cadastrarGrupo(Grupo novoGrupo, long idCriador){
 		Optional<Grupo> grupoExistente = repositoryG.findByTemaGrupo(novoGrupo.getTemaGrupo());
 		Optional<Usuario> usuarioExistente = repositoryU.findById(idCriador);
 		if(grupoExistente.isPresent()) {

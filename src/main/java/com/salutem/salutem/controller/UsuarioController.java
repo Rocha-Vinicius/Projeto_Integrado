@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.salutem.salutem.model.Grupo;
@@ -55,9 +54,9 @@ public class UsuarioController {
 				.orElse(ResponseEntity.status(400).build());
 	}
 	
-	@PostMapping("/cadastrar/grupo/{id_usuario}")
-	public ResponseEntity<Grupo> criarGrupo(@Valid @RequestBody Grupo novoGrupo, @PathVariable(value = "id_usuario") Long idGrupo){
-		return serviceU.cadastrarGrupo(novoGrupo, idGrupo);
+	@PostMapping("/cadastrar/grupo/{idUsuario}")
+	public ResponseEntity<Grupo> criarGrupo(@Valid @RequestBody Grupo novoGrupo, @PathVariable long idUsuario){
+		return serviceU.cadastrarGrupo(novoGrupo, idUsuario);
 	}
 	
 	@GetMapping
@@ -73,7 +72,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/buscar/{nomeUsuario}")
-	public ResponseEntity<Object> buscarUsuarioPorNome (@RequestParam String nomeUsuario ){
+	public ResponseEntity<Object> buscarUsuarioPorNome (@PathVariable String nomeUsuario ){
 		Optional<Object> listaDeUsuario = repositoryU.findByNomeUsuario(nomeUsuario);
 		if(listaDeUsuario.isEmpty()) {
 			return ResponseEntity.status(400).body("Usuario Inexistente");

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.salutem.salutem.model.Grupo;
@@ -41,7 +41,7 @@ public class GrupoController {
 	}
 	
 	@GetMapping("/id/{idGrupo}")
-	public ResponseEntity<Optional<Grupo>> getById(@PathVariable(value = "idGrupo") Long idGrupo){
+	public ResponseEntity<Optional<Grupo>> getById(@PathVariable long idGrupo){
 		 Optional<Grupo> grupoExistente = repository.findById(idGrupo);
 		 if(grupoExistente.isEmpty()) {
 			 return ResponseEntity.status(204).build();
@@ -50,9 +50,9 @@ public class GrupoController {
 		 }
 	}
 	
-	@GetMapping("/pesquisar")
-	public ResponseEntity<Optional<List<Grupo>>> getAllByTemaGrupo(@RequestParam String temaGrupo){
-		Optional<List<Grupo>> listaGrupos = repository.findAllByTemaGrupoContaining(temaGrupo);
+	@GetMapping("/pesquisar/{tema}")
+	public ResponseEntity<Optional<List<Grupo>>> getAllByTemaGrupo(@PathVariable String tema){
+		Optional<List<Grupo>> listaGrupos = repository.findAllByTemaGrupoContaining(tema);
 		if(listaGrupos.isEmpty()) {
 			return ResponseEntity.status(204).build();
 		}else {
@@ -60,8 +60,15 @@ public class GrupoController {
 		}
 	}
 	
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Grupo> postGrupo(@RequestBody Grupo novoGrupo ){
+		return services.criarGrupo(novoGrupo).map(resp -> ResponseEntity.status(201).body(resp))
+				.orElse(ResponseEntity.status(400).build());
+	}
+	
+	
 	@PutMapping("/alterar/{idGrupo}")
-	public ResponseEntity<Grupo> putGrupo(@PathVariable(value = "idGrupo") Long idGrupo, 
+	public ResponseEntity<Grupo> putGrupo(@PathVariable long idGrupo, 
 			@RequestBody Grupo atualizacaoGrupo){
 		return services.alterarGrupo(idGrupo, atualizacaoGrupo)
 				.map(grupoAlterado -> ResponseEntity.status(201).body(grupoAlterado))
@@ -69,7 +76,7 @@ public class GrupoController {
 	}
 	
 	@DeleteMapping("/deletar/{idGrupo}")
-	public ResponseEntity<Object> deleteGrupo(@PathVariable(value = "idGrupo") Long idGrupo){
+	public ResponseEntity<Object> deleteGrupo(@PathVariable long idGrupo){
 		return services.deletarGrupo(idGrupo);
 	}
 }
