@@ -46,4 +46,18 @@ public class PostagemService {
 			return ResponseEntity.status(404).build();
 		}
 	}
+	
+	public Optional<Postagem> atualizarPostagem(long idPostagem, Postagem postagemAtualizada){
+		Optional<Postagem> postagemExistente = repositoryP.findById(idPostagem);
+		
+		if(postagemExistente.isPresent()) {
+			postagemExistente.get().setTituloPostagem(postagemAtualizada.getTituloPostagem());
+			postagemExistente.get().setDescricaoPostagem(postagemAtualizada.getDescricaoPostagem());
+			postagemExistente.get().setEspecialidadePostagem(postagemAtualizada.getEspecialidadePostagem());
+			postagemExistente.get().setUrlImagemPostagem(postagemAtualizada.getUrlImagemPostagem());
+			return Optional.ofNullable(repositoryP.save(postagemExistente.get()));
+		}else {
+			return Optional.empty();
+		}
+	}
 }

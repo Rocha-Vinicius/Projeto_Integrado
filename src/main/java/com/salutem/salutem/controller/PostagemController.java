@@ -52,9 +52,10 @@ public class PostagemController {
 		return servicesPostagem.criarPostagem(postagem, idGrupo, idUsuario);
 	}
 	
-	@PutMapping
-	ResponseEntity<Postagem> putPostagem (@RequestBody Postagem postagem){
-		return ResponseEntity.status(200).body(repositoryPostagem.save(postagem));
+	@PutMapping("/{id}")
+	ResponseEntity<Postagem> putPostagem (@PathVariable long id,@RequestBody Postagem postagem){
+		return servicesPostagem.atualizarPostagem(id, postagem).map(resp-> ResponseEntity.status(200).body(resp))
+				.orElse(ResponseEntity.status(400).build());
 	}
 	
 	@DeleteMapping ("/apagar/{id}")

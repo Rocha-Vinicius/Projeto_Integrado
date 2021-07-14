@@ -12,7 +12,7 @@ import com.salutem.salutem.model.Grupo;
 public interface GrupoRepository extends JpaRepository<Grupo, Long> {
 	Optional<Grupo> findByTemaGrupo(String nomeGrupo);
 	
-	Optional<List<Grupo>> findAllByTemaGrupoContaining(String nomeGrupo);
+	Optional<List<Grupo>> findAllByTemaGrupoContainingIgnoreCase(String nomeGrupo);
 	
 	Optional<List<Grupo>> findAllByTemaGrupo(String nomeGrupo);
 }

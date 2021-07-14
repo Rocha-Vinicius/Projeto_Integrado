@@ -52,7 +52,7 @@ public class GrupoController {
 	
 	@GetMapping("/pesquisar/{tema}")
 	public ResponseEntity<Optional<List<Grupo>>> getAllByTemaGrupo(@PathVariable String tema){
-		Optional<List<Grupo>> listaGrupos = repository.findAllByTemaGrupoContaining(tema);
+		Optional<List<Grupo>> listaGrupos = repository.findAllByTemaGrupoContainingIgnoreCase(tema);
 		if(listaGrupos.isEmpty()) {
 			return ResponseEntity.status(204).build();
 		}else {
