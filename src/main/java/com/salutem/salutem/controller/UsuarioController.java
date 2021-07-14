@@ -66,7 +66,7 @@ public class UsuarioController {
 		if(listaDeUsuario.isEmpty()) {
 			return ResponseEntity.status(204).build();
 		}else {
-			return ResponseEntity.status(200).body(listaDeUsuario);
+			return ResponseEntity.status(200).body(listaDeUsuario) ;
 		}
 		
 	}
