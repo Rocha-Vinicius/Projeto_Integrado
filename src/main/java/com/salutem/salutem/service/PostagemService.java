@@ -55,6 +55,7 @@ public class PostagemService {
 			postagemExistente.get().setDescricaoPostagem(postagemAtualizada.getDescricaoPostagem());
 			postagemExistente.get().setEspecialidadePostagem(postagemAtualizada.getEspecialidadePostagem());
 			postagemExistente.get().setUrlImagemPostagem(postagemAtualizada.getUrlImagemPostagem());
+			postagemExistente.get().setUsuarioPostagem(postagemAtualizada.getUsuarioPostagem());
 			return Optional.ofNullable(repositoryP.save(postagemExistente.get()));
 		}else {
 			return Optional.empty();
