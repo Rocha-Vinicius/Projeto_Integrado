@@ -60,6 +60,6 @@ public class PostagemController {
 	@DeleteMapping ("/{id}")
 	ResponseEntity <Postagem> deletePostagem (@PathVariable long id){
 		repositoryPostagem.deleteById(id);
-		return ResponseEntity.status(200).body(null);
+		return ResponseEntity.status(200).build();
 	}
 }
