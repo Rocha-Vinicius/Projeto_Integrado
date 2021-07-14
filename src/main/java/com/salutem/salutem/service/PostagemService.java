@@ -36,4 +36,14 @@ public class PostagemService {
 			return ResponseEntity.status(204).build();
 		}
 	}
+	
+	public ResponseEntity<Postagem> deletarPostagem(long id){
+		Optional<Postagem> verificaPostagem = repositoryP.findById(id);
+		if(verificaPostagem.isPresent()) {
+			repositoryP.deleteById(id);
+			return ResponseEntity.status(200).build();
+		}else {
+			return ResponseEntity.status(404).build();
+		}
+	}
 }
