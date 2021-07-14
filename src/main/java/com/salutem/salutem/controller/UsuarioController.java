@@ -81,7 +81,7 @@ public class UsuarioController {
 		}
 	}
 	
-	@PutMapping("/atualizar/{idUsuario}")
+	@PostMapping("/atualizar/{idUsuario}")
 	public ResponseEntity<Usuario> atualizarUsuario (@PathVariable long idUsuario, 
 			@RequestBody Usuario atualizacaoUsuario){
 		return serviceU.atualizarUsuario(idUsuario, atualizacaoUsuario)
