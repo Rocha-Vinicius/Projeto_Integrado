@@ -57,7 +57,7 @@ public class PostagemController {
 		return ResponseEntity.status(200).body(repositoryPostagem.save(postagem));
 	}
 	
-	@DeleteMapping ("/{id}")
+	@DeleteMapping ("/apagar/{id}")
 	ResponseEntity <Postagem> deletePostagem (@PathVariable long id){
 		return servicesPostagem.deletarPostagem(id);
 	}
