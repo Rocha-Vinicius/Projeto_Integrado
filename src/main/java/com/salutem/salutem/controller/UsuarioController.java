@@ -83,7 +83,7 @@ public class UsuarioController {
 	
 	@PutMapping("/atualizar/{idUsuario}")
 	public ResponseEntity<Usuario> atualizarUsuario (@PathVariable long idUsuario, 
-			@RequestBody Usuario atualizacaoUsuario){
+			@Valid @RequestBody Usuario atualizacaoUsuario){
 		return serviceU.atualizarUsuario(idUsuario, atualizacaoUsuario)
 				.map(usuarioAtualizado -> ResponseEntity.status(201).body(usuarioAtualizado))
 				.orElse(ResponseEntity.status(400).build());
