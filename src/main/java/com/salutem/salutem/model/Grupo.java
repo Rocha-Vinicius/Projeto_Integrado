@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -42,8 +44,12 @@ public class Grupo {
 	private String urlImagemGrupo;
 	
 	//Relação entre as entidades
-	@ManyToMany(mappedBy = "listaGrupoUsuario", cascade = CascadeType.ALL) 
+	//@ManyToMany(mappedBy = "listaGrupoUsuario", cascade = CascadeType.ALL) 
+	//@JsonIgnoreProperties("listaGrupoUsuario")
+	@ManyToMany
 	@JsonIgnoreProperties("listaGrupoUsuario")
+	@JoinTable(name="tb_usuario_grupo", joinColumns = @JoinColumn(name = "fk_grupo"),
+	inverseJoinColumns = @JoinColumn(name="fk_usuario"))
 	private List<Usuario> listaDeUsuarios = new ArrayList<>(); 
 	
 	@OneToMany(mappedBy = "grupoPostagem", cascade = CascadeType.ALL)

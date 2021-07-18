@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.salutem.salutem.model.Grupo;
+import com.salutem.salutem.model.Usuario;
 import com.salutem.salutem.repository.GrupoRepository;
 import com.salutem.salutem.service.GrupoService;
 
@@ -60,10 +61,9 @@ public class GrupoController {
 		}
 	}
 	
-	@PostMapping("/cadastrar")
-	public ResponseEntity<Grupo> postGrupo(@RequestBody Grupo novoGrupo ){
-		return services.criarGrupo(novoGrupo).map(resp -> ResponseEntity.status(201).body(resp))
-				.orElse(ResponseEntity.status(400).build());
+	@PostMapping("/cadastrar/{idUsuario}")
+	public ResponseEntity<Grupo> postGrupo(@RequestBody Grupo novoGrupo, @PathVariable long idUsuario ){
+		return services.criarGrupo(novoGrupo,idUsuario);
 	}
 	
 	
@@ -73,6 +73,16 @@ public class GrupoController {
 		return services.alterarGrupo(idGrupo, atualizacaoGrupo)
 				.map(grupoAlterado -> ResponseEntity.status(201).body(grupoAlterado))
 				.orElse(ResponseEntity.status(204).build());
+	}
+	
+	@PutMapping("/entrar/{idGrupo}")
+	public ResponseEntity<Grupo> entrarGrupo(@PathVariable long idGrupo, @RequestBody Usuario usuario){
+		Optional<Grupo> grupoAuxiliar = services.entrarGrupo(idGrupo, usuario);
+		if(grupoAuxiliar.isEmpty()) {
+			return ResponseEntity.status(200).build();
+		}else {
+			return ResponseEntity.status(201).body(grupoAuxiliar.get());
+		}
 	}
 	
 	@DeleteMapping("/deletar/{idGrupo}")

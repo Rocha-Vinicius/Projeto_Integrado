@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -48,11 +49,13 @@ public class Usuario {
 	private String urlImagemUsuario;
 
 	// Criando o relacionamento entre usuario e grupo
-	@ManyToMany
-	@JsonIgnoreProperties("listaDeUsuarios")
-	@JoinTable(name = "tb_usuario_grupo", joinColumns = @JoinColumn(name = "fk_usuario"), // nomeando p facilitar a
+	//@ManyToMany
+	//@JsonIgnoreProperties("listaDeUsuarios")
+	//@JoinTable(name = "tb_usuario_grupo", joinColumns = @JoinColumn(name = "fk_usuario"), // nomeando p facilitar a
 																							// busca no banco
-			inverseJoinColumns = @JoinColumn(name = "fk_grupo"))
+			//inverseJoinColumns = @JoinColumn(name = "fk_grupo"))
+	@ManyToMany(mappedBy = "listaDeUsuarios", cascade = CascadeType.REFRESH)
+	@JsonIgnoreProperties("listaDeUsuarios")
 	private List<Grupo> listaGrupoUsuario = new ArrayList<>(); // atributo que irá mapear as relações
 	
 	@OneToMany(mappedBy = "usuarioPostagem", cascade = CascadeType.ALL)
