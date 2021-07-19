@@ -16,13 +16,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 @Entity
 @Table(name = "tb_grupo")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idGrupo")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idGrupo")
 public class Grupo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,9 +42,10 @@ public class Grupo {
 	@Size(min = 5, max = 45)
 	private String urlImagemGrupo;
 	
-	//Relação entre as entidades
-	//@ManyToMany(mappedBy = "listaGrupoUsuario", cascade = CascadeType.ALL) 
-	//@JsonIgnoreProperties("listaGrupoUsuario")
+	private String urlCapaGrupo;
+	
+	private String urlbackgroundGrupo;
+	
 	@ManyToMany
 	@JsonIgnoreProperties("listaGrupoUsuario")
 	@JoinTable(name="tb_usuario_grupo", joinColumns = @JoinColumn(name = "fk_grupo"),
@@ -111,5 +111,23 @@ public class Grupo {
 	public void setListaDePostagens(List<Postagem> listaDePostagens) {
 		this.listaDePostagens = listaDePostagens;
 	}
+
+	public String getUrlCapaGrupo() {
+		return urlCapaGrupo;
+	}
+
+	public void setUrlCapaGrupo(String urlCapaGrupo) {
+		this.urlCapaGrupo = urlCapaGrupo;
+	}
+
+	public String getUrlbackgroundGrupo() {
+		return urlbackgroundGrupo;
+	}
+
+	public void setUrlbackgroundGrupo(String urlbackgroundGrupo) {
+		this.urlbackgroundGrupo = urlbackgroundGrupo;
+	}
+	
+	
 	
 }

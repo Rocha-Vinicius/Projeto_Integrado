@@ -23,6 +23,9 @@ public class UsuarioService {
 	@Autowired
 	public UsuarioRepository repositoryU;
 	
+	@Autowired
+	public GrupoService serviceGrupo;
+	
 	/**
 	 * 
 	 * @param novoUsuario
@@ -67,9 +70,19 @@ public class UsuarioService {
 		}
 	}
 	
-	public ResponseEntity<Usuario> deletarIdUsuario(long idUsuario){
+	public ResponseEntity<Usuario> deletarIdUsuario(Long idUsuario){
+		int cont = 0;
 		Optional<Usuario> verificaIdUsuario = repositoryU.findById(idUsuario);
 		if(verificaIdUsuario.isPresent()) {
+			for(Grupo grupo: verificaIdUsuario.get().getListaGrupoUsuario()) {
+				for(Usuario user : grupo.getListaDeUsuarios()) {
+					if(cont == 0 && user.getIdUsuario() == idUsuario) {
+						serviceGrupo.deletarGrupo(grupo.getIdGrupo());
+					}
+					serviceGrupo.sairGrupo(grupo.getIdGrupo(), idUsuario);
+					cont ++;
+				}
+			}
 			repositoryU.deleteById(idUsuario);
 			return ResponseEntity.status(200).build();
 		}else {

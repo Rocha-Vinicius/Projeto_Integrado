@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.salutem.salutem.model.Grupo;
-import com.salutem.salutem.model.Usuario;
 import com.salutem.salutem.repository.GrupoRepository;
 import com.salutem.salutem.service.GrupoService;
 
@@ -75,14 +74,19 @@ public class GrupoController {
 				.orElse(ResponseEntity.status(204).build());
 	}
 	
-	@PutMapping("/entrar/{idGrupo}")
-	public ResponseEntity<Grupo> entrarGrupo(@PathVariable long idGrupo, @RequestBody Usuario usuario){
-		Optional<Grupo> grupoAuxiliar = services.entrarGrupo(idGrupo, usuario);
+	@PutMapping("/entrar/{idGrupo}/{idUsuario}")
+	public ResponseEntity<Grupo> entrarGrupo(@PathVariable Long idGrupo, @PathVariable Long idUsuario){
+		Optional<Grupo> grupoAuxiliar = services.entrarGrupo(idGrupo, idUsuario);
 		if(grupoAuxiliar.isEmpty()) {
 			return ResponseEntity.status(200).build();
 		}else {
 			return ResponseEntity.status(201).body(grupoAuxiliar.get());
 		}
+	}
+	
+	@PutMapping("/sair/{idGrupo}/{idUsuario}")
+	public ResponseEntity<Grupo> sairGrupo (@PathVariable Long idGrupo, @PathVariable Long idUsuario){
+		return services.sairGrupo(idGrupo, idUsuario);
 	}
 	
 	@DeleteMapping("/deletar/{idGrupo}")

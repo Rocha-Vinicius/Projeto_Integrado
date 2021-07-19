@@ -90,7 +90,7 @@ public class UsuarioController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Usuario> deletarUsuario (@PathVariable long id){
+	public ResponseEntity<Usuario> deletarUsuario (@PathVariable Long id){
 		return serviceU.deletarIdUsuario(id);
 	}
 

@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,18 +15,16 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 @Entity
 @Table(name = "tb_usuario")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idUsuario")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idUsuario;
+	private Long idUsuario;
 
 	@NotNull
 	@Size(min = 5, max = 45)
@@ -48,12 +44,6 @@ public class Usuario {
 	@Size(min = 5, max = 45)
 	private String urlImagemUsuario;
 
-	// Criando o relacionamento entre usuario e grupo
-	//@ManyToMany
-	//@JsonIgnoreProperties("listaDeUsuarios")
-	//@JoinTable(name = "tb_usuario_grupo", joinColumns = @JoinColumn(name = "fk_usuario"), // nomeando p facilitar a
-																							// busca no banco
-			//inverseJoinColumns = @JoinColumn(name = "fk_grupo"))
 	@ManyToMany(mappedBy = "listaDeUsuarios", cascade = CascadeType.REFRESH)
 	@JsonIgnoreProperties("listaDeUsuarios")
 	private List<Grupo> listaGrupoUsuario = new ArrayList<>(); // atributo que irá mapear as relações
@@ -62,11 +52,11 @@ public class Usuario {
 	@JsonIgnoreProperties
 	private List<Postagem> listaPostagemUsuario = new ArrayList<>();
 
-	public long getIdUsuario() {
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(long idUsuario) {
+	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
