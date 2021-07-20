@@ -72,7 +72,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/buscar/{nomeUsuario}")
-	public ResponseEntity<Object> buscarUsuarioPorNome (@PathVariable String nomeUsuario ){
+	public ResponseEntity<Object> buscarUsuarioPorNome(@PathVariable String nomeUsuario ){
 		Optional<Object> listaDeUsuario = repositoryU.findByNomeUsuario(nomeUsuario);
 		if(listaDeUsuario.isEmpty()) {
 			return ResponseEntity.status(400).body("Usuario Inexistente");
