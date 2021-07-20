@@ -27,11 +27,11 @@ public class Usuario {
 	private Long idUsuario;
 
 	@NotNull
-	@Size(min = 5, max = 45)
+	@Size(min=1)
 	private String nomeUsuario;
 
 	@NotNull
-	@Size(min = 5, max = 45)
+	@Size(min = 5)
 	private String emailUsuario;
 
 	@NotNull
@@ -41,8 +41,12 @@ public class Usuario {
 	@Size(min = 6, max = 6)
 	private String crmUsuario;
 
-	@Size(min = 5, max = 45)
 	private String urlImagemUsuario;
+	
+	private String urlCapa;
+	
+	private String urlBackground;
+	
 
 	@ManyToMany(mappedBy = "listaDeUsuarios", cascade = CascadeType.REFRESH)
 	@JsonIgnoreProperties("listaDeUsuarios")
@@ -115,5 +119,23 @@ public class Usuario {
 	public void setListaPostagemUsuario(List<Postagem> listaPostagemUsuario) {
 		this.listaPostagemUsuario = listaPostagemUsuario;
 	}
+
+	public String getUrlCapa() {
+		return urlCapa;
+	}
+
+	public void setUrlCapa(String urlCapa) {
+		this.urlCapa = urlCapa;
+	}
+
+	public String getUrlBackground() {
+		return urlBackground;
+	}
+
+	public void setUrlBackground(String urlBackground) {
+		this.urlBackground = urlBackground;
+	}
+	
+	
 
 }
