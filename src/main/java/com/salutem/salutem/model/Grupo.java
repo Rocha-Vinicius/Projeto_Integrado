@@ -42,10 +42,6 @@ public class Grupo {
 	@Size(min = 5, max = 45)
 	private String urlImagemGrupo;
 	
-	private String urlCapaGrupo;
-	
-	private String urlbackgroundGrupo;
-	
 	@ManyToMany
 	@JsonIgnoreProperties("listaGrupoUsuario")
 	@JoinTable(name="tb_usuario_grupo", joinColumns = @JoinColumn(name = "fk_grupo"),
@@ -111,23 +107,5 @@ public class Grupo {
 	public void setListaDePostagens(List<Postagem> listaDePostagens) {
 		this.listaDePostagens = listaDePostagens;
 	}
-
-	public String getUrlCapaGrupo() {
-		return urlCapaGrupo;
-	}
-
-	public void setUrlCapaGrupo(String urlCapaGrupo) {
-		this.urlCapaGrupo = urlCapaGrupo;
-	}
-
-	public String getUrlbackgroundGrupo() {
-		return urlbackgroundGrupo;
-	}
-
-	public void setUrlbackgroundGrupo(String urlbackgroundGrupo) {
-		this.urlbackgroundGrupo = urlbackgroundGrupo;
-	}
-	
-	
-	
+		
 }
