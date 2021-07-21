@@ -49,11 +49,11 @@ public class Usuario {
 	
 
 	@ManyToMany(mappedBy = "listaDeUsuarios", cascade = CascadeType.REFRESH)
-	@JsonIgnoreProperties("listaDeUsuarios")
+	@JsonIgnoreProperties({"listaDeUsuarios","listaDePostagens"})
 	private List<Grupo> listaGrupoUsuario = new ArrayList<>(); // atributo que irá mapear as relações
 	
 	@OneToMany(mappedBy = "usuarioPostagem", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties
+	@JsonIgnoreProperties({"usuarioPostagem","grupoPostagem"})
 	private List<Postagem> listaPostagemUsuario = new ArrayList<>();
 
 	public Long getIdUsuario() {

@@ -43,13 +43,13 @@ public class Grupo {
 	private String urlImagemGrupo;
 	
 	@ManyToMany
-	@JsonIgnoreProperties("listaGrupoUsuario")
+	@JsonIgnoreProperties({"listaGrupoUsuario","listaPostagemUsuario"})
 	@JoinTable(name="tb_usuario_grupo", joinColumns = @JoinColumn(name = "fk_grupo"),
 	inverseJoinColumns = @JoinColumn(name="fk_usuario"))
 	private List<Usuario> listaDeUsuarios = new ArrayList<>(); 
 	
 	@OneToMany(mappedBy = "grupoPostagem", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties
+	@JsonIgnoreProperties({"grupoPostagem","usuarioPostagem"})
 	private List<Postagem> listaDePostagens = new ArrayList<>();
 
 	public Long getIdGrupo() {

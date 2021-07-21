@@ -1,11 +1,9 @@
 package com.salutem.salutem.model;
 
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name = "tb_postagem")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPostagem")
 public class Postagem {
 	
 	@Id
@@ -45,12 +42,12 @@ public class Postagem {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 	
-	@ManyToOne 
-	@JsonIgnoreProperties("listaDePostagens")
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"listaDePostagens","listaDeUsuarios"})
 	private Grupo grupoPostagem; // linkando com postagens
 	
-	@ManyToOne 
-	@JsonIgnoreProperties("listaPostagemUsuario")
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"listaPostagemUsuario","listaGrupoUsuario"})
 	private Usuario usuarioPostagem;
 
 	public Long getIdPostagem() {
